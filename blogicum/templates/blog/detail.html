@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}
-  <!-- Формируется из локации и даты -->
-  <title>Остров отчаянья. 25 октября 1659 года</title>
+  {{ post.location }}. {{ post.date }}
 {% endblock %}
 
 
@@ -12,13 +10,13 @@
     <article>
       <ul>
         <li>
-          Место: {{ post.location}}             
+          Место: {{ post.location }}             
         </li>
         <li>
-           Дата: {{ post.date}}   
+           Дата: {{ post.date }}   
         </li>
         <li>
-          Категория: <a href="../../category/{{ post.category}}">{{ post.category}}</a>
+          Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category}}</a>
         </li>
       </ul>         
       <p>
