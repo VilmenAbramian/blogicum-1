@@ -3,28 +3,18 @@ from django.http import Http404
 
 
 def index(request):
-    context = {'posts_list': posts[::-1]}
-    template_name = 'blog/index.html'
-    return render(request, template_name, context)
+    return render(request, 'blog/index.html', {'posts_list': posts[::-1]})
 
 
 def post_detail(request, post_id):
-    posts_dict = {}
-    for post in posts:
-        posts_dict[post['id']] = post
-
     if post_id not in posts_dict:
         raise Http404(f"Поста под номером {post_id} не существует")
 
-    context = {'post': posts_dict[post_id]}
-    template_name = 'blog/detail.html'
-    return render(request, template_name, context)
+    return render(request, 'blog/detail.html', {'post': posts_dict[post_id]})
 
 
 def category_posts(request, category_slug):
-    context = {'category': category_slug}
-    template_name = 'blog/category.html'
-    return render(request, template_name, context)
+    return render(request, 'blog/category.html', {'category': category_slug})
 
 
 posts = [
@@ -69,3 +59,5 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
+
+posts_dict = {post['id']: post for post in posts}
